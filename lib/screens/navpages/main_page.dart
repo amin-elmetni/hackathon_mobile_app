@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hackathon_project/misc/colors.dart';
-import 'package:hackathon_project/screens/navpages/main_drawer.dart';
+import 'package:hackathon_project/widgets/main_drawer.dart';
 import 'package:hackathon_project/screens/navpages/bar_item_page.dart';
 import 'package:hackathon_project/screens/navpages/home_page.dart';
 import 'package:hackathon_project/screens/navpages/account_page.dart';
@@ -36,16 +36,12 @@ class _MainPageState extends State<MainPage> {
       backgroundColor: Colors.white,
       body: pages[currentIndex],
       bottomNavigationBar: BottomNavigationBar(
-        // unselectedFontSize: 0,
-        // selectedFontSize: 0,
         type: BottomNavigationBarType.fixed,
         backgroundColor: AppColors.mainColor,
         onTap: _onTap,
         currentIndex: currentIndex,
         selectedItemColor: Colors.white,
         unselectedItemColor: Colors.white.withOpacity(0.5),
-        // showSelectedLabels: false,
-        // showUnselectedLabels: false,
         showUnselectedLabels: true,
         elevation: 0,
         items: const [

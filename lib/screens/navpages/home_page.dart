@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
+import 'package:flutter_blurhash/flutter_blurhash.dart';
 import 'package:hackathon_project/misc/colors.dart';
 import 'package:hackathon_project/widgets/app_large_text.dart';
 import 'package:hackathon_project/widgets/app_text.dart';
+import 'package:transparent_image/transparent_image.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -75,23 +78,21 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
             const SizedBox(height: 10),
             //* TABBAR
             Container(
-              child: Align(
-                child: TabBar(
-                  tabAlignment: TabAlignment.start,
-                  labelPadding: const EdgeInsets.only(left: 20, right: 20),
-                  controller: tabController,
-                  labelColor: Colors.black,
-                  unselectedLabelColor: Colors.grey,
-                  isScrollable: true,
-                  dividerColor: Colors.transparent,
-                  indicator:
-                      CircleTabIndicator(color: AppColors.mainColor, radius: 4),
-                  tabs: const [
-                    Tab(text: 'Places'),
-                    Tab(text: 'Hotels'),
-                    Tab(text: 'Restaurants'),
-                  ],
-                ),
+              child: TabBar(
+                tabAlignment: TabAlignment.start,
+                labelPadding: const EdgeInsets.only(left: 20, right: 20),
+                controller: tabController,
+                labelColor: Colors.black,
+                unselectedLabelColor: Colors.grey,
+                isScrollable: true,
+                dividerColor: Colors.transparent,
+                indicator:
+                    CircleTabIndicator(color: AppColors.mainColor, radius: 4),
+                tabs: const [
+                  Tab(text: 'Places'),
+                  Tab(text: 'Hotels'),
+                  Tab(text: 'Restaurants'),
+                ],
               ),
             ),
             //* TABBAR VIEW
@@ -107,26 +108,29 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                     itemCount: images.length,
                     itemBuilder: (context, index) {
                       return Container(
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(20),
+                        ),
+                        clipBehavior: Clip.hardEdge,
                         margin: const EdgeInsets.only(right: 15, top: 20),
                         width: 200,
                         height: 300,
                         child: Stack(
                           children: [
-                            Container(
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(20),
-                                color: Colors.white,
-                                image: DecorationImage(
-                                    image: AssetImage(
-                                        'assets/images/places/${images.values.elementAt(index)}'),
-                                    fit: BoxFit.cover),
-                              ),
+                            FadeInImage(
+                              placeholder: MemoryImage(kTransparentImage),
+                              image: AssetImage(
+                                  'assets/images/places/${images.values.elementAt(index)}'),
+                              fit: BoxFit.cover,
+                              height: double.infinity,
+                              width: double.infinity,
                             ),
-                            Align(
-                              alignment: Alignment.bottomLeft,
+                            Positioned(
+                              bottom: 15,
+                              left: 0,
+                              right: 0,
                               child: Container(
                                 color: AppColors.mainColor.withOpacity(0.6),
-                                margin: const EdgeInsets.only(bottom: 16),
                                 padding: const EdgeInsets.symmetric(
                                     horizontal: 14, vertical: 5),
                                 child: Column(
