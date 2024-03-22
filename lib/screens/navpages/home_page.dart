@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
-import 'package:flutter_blurhash/flutter_blurhash.dart';
 import 'package:hackathon_project/misc/colors.dart';
 import 'package:hackathon_project/widgets/app_large_text.dart';
 import 'package:hackathon_project/widgets/app_text.dart';
