@@ -11,6 +11,7 @@ enum PlaceType {
   historical,
   playGround,
   nature,
+  park,
 }
 
 class Place {
