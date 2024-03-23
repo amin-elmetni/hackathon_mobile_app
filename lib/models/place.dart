@@ -1,4 +1,5 @@
 import 'package:uuid/uuid.dart';
+import 'package:hackathon_project/data/dummy_data.dart';
 
 const uuid = Uuid();
 
@@ -20,7 +21,9 @@ class Place {
     required this.description,
     required this.image,
     required this.type,
-    required this.location,
+    required this.address,
+    required this.country,
+    required this.city,
     this.rating = 0,
   }) : id = uuid.v4();
 
@@ -29,6 +32,8 @@ class Place {
   final String description;
   final String image;
   final PlaceType type;
-  final String location;
+  final String address;
   final double rating;
+  final Country country;
+  final City city;
 }

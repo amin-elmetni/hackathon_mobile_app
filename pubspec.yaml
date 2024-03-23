@@ -63,6 +63,8 @@ flutter:
   assets:
     - assets/images/
     - assets/images/places/
+    - assets/images/hotels/
+    - assets/images/restaurants/
     - assets/icons/
   #   - images/a_dot_ham.jpeg
 
