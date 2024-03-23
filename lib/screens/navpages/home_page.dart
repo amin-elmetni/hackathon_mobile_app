@@ -3,7 +3,9 @@ import 'package:hackathon_project/data/dummy_data.dart';
 import 'package:hackathon_project/misc/colors.dart';
 import 'package:hackathon_project/widgets/app_large_text.dart';
 import 'package:hackathon_project/widgets/app_text.dart';
+import 'package:hackathon_project/widgets/mini_hotel_item.dart';
 import 'package:hackathon_project/widgets/mini_place_item.dart';
+import 'package:hackathon_project/widgets/mini_restaurant_item.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -101,8 +103,38 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                       );
                     },
                   ),
-                  const Text('Hotels'),
-                  const Text('Restaurants'),
+                  ListView.builder(
+                    scrollDirection: Axis.horizontal,
+                    itemCount: dummyPlaces.length,
+                    itemBuilder: (context, index) {
+                      return Container(
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(20),
+                        ),
+                        clipBehavior: Clip.hardEdge,
+                        margin: const EdgeInsets.only(right: 15, top: 20),
+                        width: 200,
+                        height: 300,
+                        child: MiniHotelItem(dummyHotels[index]),
+                      );
+                    },
+                  ),
+                  ListView.builder(
+                    scrollDirection: Axis.horizontal,
+                    itemCount: dummyPlaces.length,
+                    itemBuilder: (context, index) {
+                      return Container(
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(20),
+                        ),
+                        clipBehavior: Clip.hardEdge,
+                        margin: const EdgeInsets.only(right: 15, top: 20),
+                        width: 200,
+                        height: 300,
+                        child: MiniRestaurantItem(dummyrestaurants[index]),
+                      );
+                    },
+                  ),
                 ],
               ),
             ),

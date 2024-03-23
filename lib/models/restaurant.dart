@@ -1,4 +1,5 @@
 import 'package:uuid/uuid.dart';
+import 'package:hackathon_project/data/dummy_data.dart';
 
 const uuid = Uuid();
 
@@ -13,10 +14,12 @@ class Restaurant {
     required this.name,
     required this.description,
     required this.type,
-    required this.rating,
     required this.image,
-    required this.location,
-    required this.website,
+    required this.address,
+    this.website = '',
+    required this.country,
+    required this.city,
+    this.rating = 0,
   }) : id = uuid.v4();
 
   final String id;
@@ -25,6 +28,8 @@ class Restaurant {
   final RestaurantType type;
   final double rating;
   final String image;
-  final String location;
+  final String address;
   final String website;
+  final Country country;
+  final City city;
 }

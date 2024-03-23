@@ -1,17 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:hackathon_project/misc/colors.dart';
-import 'package:hackathon_project/models/place.dart';
+import 'package:hackathon_project/models/hotel.dart';
 import 'package:hackathon_project/widgets/app_large_text.dart';
 import 'package:hackathon_project/widgets/app_text.dart';
 import 'package:transparent_image/transparent_image.dart';
 
-class MiniPlaceItem extends StatelessWidget {
-  const MiniPlaceItem(this.place, {super.key});
+class MiniHotelItem extends StatelessWidget {
+  const MiniHotelItem(this.hotel, {super.key});
 
-  final Place place;
+  final Hotel hotel;
 
   String get countryCityText {
-    return '${place.country.name[0].toUpperCase()}${place.country.name.substring(1)}, ${place.city.name[0].toUpperCase()}${place.city.name.substring(1)}';
+    return '${hotel.country.name[0].toUpperCase()}${hotel.country.name.substring(1)}, ${hotel.city.name[0].toUpperCase()}${hotel.city.name.substring(1)}';
   }
 
   @override
@@ -20,7 +20,7 @@ class MiniPlaceItem extends StatelessWidget {
       children: [
         FadeInImage(
           placeholder: MemoryImage(kTransparentImage),
-          image: AssetImage(place.image),
+          image: AssetImage(hotel.image),
           fit: BoxFit.cover,
           height: double.infinity,
           width: double.infinity,
@@ -40,7 +40,7 @@ class MiniPlaceItem extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     AppLargeText(
-                      text: place.name,
+                      text: hotel.name,
                       size: 18,
                       color: Colors.white,
                     ),
@@ -53,7 +53,7 @@ class MiniPlaceItem extends StatelessWidget {
                         ),
                         const SizedBox(width: 4),
                         AppText(
-                          text: '${place.rating}',
+                          text: '${hotel.rating}',
                           color: Colors.white,
                           size: 12,
                         ),

@@ -32,8 +32,3 @@ class ResponsiveButton extends StatelessWidget {
     );
   }
 }
-
-// decoration: BoxDecoration(
-//         borderRadius: BorderRadius.circular(10),
-//         color: AppColors.mainColor,
-//       ),
