@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
-import 'package:flutter_blurhash/flutter_blurhash.dart';
+import 'package:hackathon_project/data/dummy_data.dart';
 import 'package:hackathon_project/misc/colors.dart';
 import 'package:hackathon_project/widgets/app_large_text.dart';
 import 'package:hackathon_project/widgets/app_text.dart';
-import 'package:transparent_image/transparent_image.dart';
+import 'package:hackathon_project/widgets/mini_hotel_card.dart';
+import 'package:hackathon_project/widgets/mini_place_card.dart';
+import 'package:hackathon_project/widgets/mini_restaurant_card.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -14,21 +15,6 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
-  var icons = {
-    "snorkling.png": "Snorkling",
-    "hiking.png": "Hiking",
-    "horsing.png": "Horsing",
-    "cinema.png": "Cinema",
-    "biking.png": "Biking",
-  };
-
-  var images = {
-    ["Fedan", "Morocco, Tetouan"]: "fedan.jpg",
-    ["Bab Okla", "Morocco, Tetouan"]: "bab_okla.jpg",
-    ["Eglisia", "Morocco, Tetouan"]: "eglesia.jpg",
-    ["Hamama", "Morocco, Tetouan"]: "hamama.jpg",
-  };
-
   @override
   Widget build(BuildContext context) {
     TabController tabController = TabController(length: 3, vsync: this);
@@ -77,23 +63,21 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
             ),
             const SizedBox(height: 10),
             //* TABBAR
-            Container(
-              child: TabBar(
-                tabAlignment: TabAlignment.start,
-                labelPadding: const EdgeInsets.only(left: 20, right: 20),
-                controller: tabController,
-                labelColor: Colors.black,
-                unselectedLabelColor: Colors.grey,
-                isScrollable: true,
-                dividerColor: Colors.transparent,
-                indicator:
-                    CircleTabIndicator(color: AppColors.mainColor, radius: 4),
-                tabs: const [
-                  Tab(text: 'Places'),
-                  Tab(text: 'Hotels'),
-                  Tab(text: 'Restaurants'),
-                ],
-              ),
+            TabBar(
+              tabAlignment: TabAlignment.start,
+              labelPadding: const EdgeInsets.only(left: 20, right: 20),
+              controller: tabController,
+              labelColor: Colors.black,
+              unselectedLabelColor: Colors.grey,
+              isScrollable: true,
+              dividerColor: Colors.transparent,
+              indicator:
+                  CircleTabIndicator(color: AppColors.mainColor, radius: 4),
+              tabs: const [
+                Tab(text: 'Places'),
+                Tab(text: 'Hotels'),
+                Tab(text: 'Restaurants'),
+              ],
             ),
             //* TABBAR VIEW
             Container(
@@ -105,7 +89,7 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                 children: [
                   ListView.builder(
                     scrollDirection: Axis.horizontal,
-                    itemCount: images.length,
+                    itemCount: dummyPlaces.length,
                     itemBuilder: (context, index) {
                       return Container(
                         decoration: BoxDecoration(
@@ -115,60 +99,42 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                         margin: const EdgeInsets.only(right: 15, top: 20),
                         width: 200,
                         height: 300,
-                        child: Stack(
-                          children: [
-                            FadeInImage(
-                              placeholder: MemoryImage(kTransparentImage),
-                              image: AssetImage(
-                                  'assets/images/places/${images.values.elementAt(index)}'),
-                              fit: BoxFit.cover,
-                              height: double.infinity,
-                              width: double.infinity,
-                            ),
-                            Positioned(
-                              bottom: 15,
-                              left: 0,
-                              right: 0,
-                              child: Container(
-                                color: AppColors.mainColor.withOpacity(0.6),
-                                padding: const EdgeInsets.symmetric(
-                                    horizontal: 14, vertical: 5),
-                                child: Column(
-                                  mainAxisSize: MainAxisSize.min,
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    AppLargeText(
-                                      text: images.keys.elementAt(index)[0],
-                                      size: 18,
-                                      color: Colors.white,
-                                    ),
-                                    const SizedBox(height: 3),
-                                    Row(
-                                      children: [
-                                        const Icon(
-                                          Icons.location_pin,
-                                          color: Colors.white,
-                                          size: 20,
-                                        ),
-                                        const SizedBox(width: 4),
-                                        AppText(
-                                          text: images.keys.elementAt(index)[1],
-                                          color: Colors.white,
-                                          size: 12,
-                                        ),
-                                      ],
-                                    ),
-                                  ],
-                                ),
-                              ),
-                            )
-                          ],
-                        ),
+                        child: MiniPlaceCard(dummyPlaces[index]),
                       );
                     },
                   ),
-                  const Text('Hotels'),
-                  const Text('Restaurants'),
+                  ListView.builder(
+                    scrollDirection: Axis.horizontal,
+                    itemCount: dummyPlaces.length,
+                    itemBuilder: (context, index) {
+                      return Container(
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(20),
+                        ),
+                        clipBehavior: Clip.hardEdge,
+                        margin: const EdgeInsets.only(right: 15, top: 20),
+                        width: 200,
+                        height: 300,
+                        child: MiniHotelCard(dummyHotels[index]),
+                      );
+                    },
+                  ),
+                  ListView.builder(
+                    scrollDirection: Axis.horizontal,
+                    itemCount: dummyPlaces.length,
+                    itemBuilder: (context, index) {
+                      return Container(
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(20),
+                        ),
+                        clipBehavior: Clip.hardEdge,
+                        margin: const EdgeInsets.only(right: 15, top: 20),
+                        width: 200,
+                        height: 300,
+                        child: MiniRestaurantCard(dummyrestaurants[index]),
+                      );
+                    },
+                  ),
                 ],
               ),
             ),
@@ -180,7 +146,7 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   AppLargeText(
-                    text: 'Explore more',
+                    text: 'Activities',
                     size: 22,
                   ),
                   AppText(
@@ -198,7 +164,7 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
               margin: const EdgeInsets.only(left: 20),
               child: ListView.builder(
                 scrollDirection: Axis.horizontal,
-                itemCount: icons.length,
+                itemCount: placesTypes.length,
                 itemBuilder: (_, index) {
                   return Container(
                     margin: const EdgeInsets.only(right: 30),
@@ -212,17 +178,15 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                             color: AppColors.buttonBackground,
                             image: DecorationImage(
                               image: AssetImage(
-                                  'assets/icons/${icons.keys.elementAt(index)}'),
+                                  'assets/icons/${placesTypes.values.elementAt(index)}'),
                               fit: BoxFit.cover,
                             ),
                           ),
                         ),
                         const SizedBox(height: 10),
-                        Container(
-                          child: AppText(
-                            text: icons.values.elementAt(index),
-                            color: AppColors.textColor2,
-                          ),
+                        AppText(
+                          text: placesTypes.keys.elementAt(index),
+                          color: AppColors.textColor2,
                         ),
                       ],
                     ),
